@@ -1,0 +1,149 @@
+commit fe0e5d3eb7aad7f3393c9a1bfeb83aaf84bc3a5e
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Jul 13 03:37:56 2017 +0000
+
+    install third_party celery
+
+commit 64366820f3edc55628dd787798350ae1ac14bd48
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Mar 17 01:41:24 2017 +0000
+
+    fix version conflicts
+
+commit 8c5091eae99e89e91add6be66fefe206e3d8c1d2
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Jan 11 19:16:17 2017 +0000
+
+    install hysds_commons
+
+commit dec65c4108435f46a8a84cf2b312444ee2c6f75e
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Jan 10 16:17:59 2017 +0000
+
+    update to latest pip and setuptools to process dependency links
+
+commit 27aeb4e64786e7a2dffe590d137f8bc9696d229c
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Mon May 9 14:25:03 2016 +0000
+
+    remove docker provisioning
+
+commit c4e2d9befcbe342d6523819c751f3a032efca134
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Mon May 9 14:13:03 2016 +0000
+
+    install docker
+
+commit 40bd412386aa0a97cb9f87f948f0269f9f287a3b
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Jan 27 15:16:41 2016 +0000
+
+    remove group write perm
+
+commit 1b868a94649fdd2e5b23ee208dee7664e4907388
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Jan 27 15:11:48 2016 +0000
+
+    require user
+
+commit b9bfae170fb211f7dc45b35abcfceac79f56148f
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Nov 6 20:25:15 2015 +0000
+
+    remove credential copying from centos user
+
+commit b53434783ade64e2d350d65657a73a738211bb66
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Nov 6 16:28:54 2015 +0000
+
+    unify name for hysds install script
+
+commit 42f57096a13397afa8a47ff137fe1e11e4c161a0
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Nov 5 20:04:04 2015 +0000
+
+    set swapfile max size
+
+commit cb02e04480a94e810d84c89b057dbb9db6315ccd
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 14 19:00:58 2015 +0000
+
+    force install supervisor
+
+commit 12f0130516072b7a3fb9cc6d1762804e62459a57
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Oct 14 18:13:36 2015 +0000
+
+    use pip for development mode; install osaka
+
+commit ccc4eda6e508526f610df4a3999e950894e7e54d
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Oct 1 18:46:42 2015 +0000
+
+    localize cloud_utils
+
+commit b5b2bca416075b02af52aa992a517f1863769c54
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Oct 1 18:43:54 2015 +0000
+
+    factor out cloud utilities
+
+commit 6d14737ce62373bc0b7c65c51f21b5e71e6fd782
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Oct 1 16:53:15 2015 +0000
+
+    update doc
+
+commit 90485c62e01e8fe0c5e5ad6ed3accb871b38a01d
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Sep 30 22:42:05 2015 +0000
+
+    open up default tsunami port
+
+commit 176d0fa85740c9081bf195996c1c8a294a31c94c
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Sep 29 23:27:07 2015 +0000
+
+    update
+
+commit 7922d0a696ba98a935e7d3cb1d47b1d97dcbcd9e
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Sep 29 15:42:19 2015 +0000
+
+    add timeout for swap file creation
+
+commit ed2da85506f94a7d17d1430495f2e55f0be6ab76
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Sep 25 00:17:12 2015 +0000
+
+    update doc
+
+commit c4a11a58c17d52b9390ae7a973fa4db1290013ec
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 24 23:56:58 2015 +0000
+
+    add req on autoindex
+
+commit 0f3f4a34474665be238d49b27750d6e55e7c2f9b
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 24 23:35:38 2015 +0000
+
+    fix umask
+
+commit 765cc7dc4d8cfdd03efff44687abfc89a29589de
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 24 22:43:31 2015 +0000
+
+    setup httpd for hysds work dir
+
+commit 521c126403d3c81f812d6f03cea74686d456d1d8
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 24 18:31:43 2015 +0000
+
+    update
+
+commit 1cc7ec945cc0e41e8c13d3b859fb459dd49727da
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 24 17:54:43 2015 +0000
+
+    initial commit

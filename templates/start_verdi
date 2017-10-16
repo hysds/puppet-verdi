@@ -1,0 +1,4 @@
+#!/bin/bash
+
+VERDI_DIR=<%= @verdi_dir %>
+$VERDI_DIR/bin/verdid start
