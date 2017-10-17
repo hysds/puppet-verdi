@@ -75,15 +75,6 @@ class verdi {
 
 
   #####################################################
-  # add swap file 
-  #####################################################
-
-  swap { '/mnt/swapfile':
-    ensure   => present,
-  }
-
-
-  #####################################################
   # work directory
   #####################################################
 
@@ -245,7 +236,7 @@ class verdi {
 
 
   #####################################################
-  # secure and start httpd
+  # secure and configure httpd
   #####################################################
 
   file { "/etc/httpd/conf.d/autoindex.conf":
@@ -278,55 +269,6 @@ class verdi {
     mode    => 0644,
     require => Package['httpd'],
   }
-
-
-  service { 'httpd':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    hasstatus  => true,
-    require    => [
-                   File['/etc/httpd/conf.d/autoindex.conf'],
-                   File['/etc/httpd/conf.d/hysds_dav.conf'],
-                   File['/etc/httpd/conf.d/welcome.conf'],
-                   File['/var/www/html/index.html'],
-                   Exec['daemon-reload'],
-                  ],
-  }
-
-
-  #####################################################
-  # firewalld config
-  #####################################################
-
-  firewalld::zone { 'public':
-    services => [ "ssh", "dhcpv6-client", "http", "https" ],
-    ports => [
-      {
-        # work_dir dav server
-        port     => "8085",
-        protocol => "tcp",
-      },
-      {
-        # work_dir tsunamid (tcp)
-        port     => "46224",
-        protocol => "tcp",
-      },
-      {
-        # work_dir tsunamid (udp)
-        port     => "46224",
-        protocol => "udp",
-      },
-    ]
-  }
-
-
-  #firewalld::service { 'dummy':
-  #  description	=> 'My dummy service',
-  #  ports       => [{port => '1234', protocol => 'tcp',},],
-  #  modules     => ['some_module_to_load'],
-  #  destination	=> {ipv4 => '224.0.0.251', ipv6 => 'ff02::fb'},
-  #}
 
 
 }
