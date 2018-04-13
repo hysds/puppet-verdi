@@ -145,3 +145,11 @@ if [ "$?" -ne 0 ]; then
   echo "Failed to run 'pip install -e .' for $PACKAGE."
   exit 1
 fi
+
+
+# export latest hysds-dockerfiles package
+cd $OPS
+PACKAGE=hysds-dockerfiles
+if [ ! -d "$OPS/$PACKAGE" ]; then
+  git clone ${GIT_URL}/hysds/${PACKAGE}.git
+fi
