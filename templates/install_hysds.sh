@@ -137,7 +137,7 @@ fi
 cd $OPS
 PACKAGE=sciflo
 if [ ! -d "$OPS/$PACKAGE" ]; then
-  git clone ${GIT_URL}/hysds/${PACKAGE}.git
+  git clone -b lite --single-branch ${GIT_URL}/hysds/${PACKAGE}.git
 fi
 cd $OPS/$PACKAGE
 pip install -e .
