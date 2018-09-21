@@ -22,4 +22,15 @@ RUN set -ex \
 
 FROM hysds/base:latest
 
+# provision via puppet
+RUN set -ex \
+ && sudo yum update -y \
+ && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
+ && sudo chmod 755 /tmp/install.sh \
+ && sudo /tmp/install.sh \
+ && sudo rm -rf /etc/puppet/modules/* /mnt/swapfile \
+ && sudo yum clean all \
+ && sudo rm -f /tmp/install.sh \
+ && sudo rm -rf /var/cache/yum
+
 COPY --from=0 /home/ops /home/ops
