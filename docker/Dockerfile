@@ -1,8 +1,5 @@
 FROM hysds/dev:latest
 
-MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
-LABEL description "Base Centos7 image for HySDS"
-
 # git url to hysds dev puppet module
 ENV GIT_URL https://github.com/hysds/puppet-verdi/raw/docker-lite/install.sh
 
@@ -21,6 +18,12 @@ RUN set -ex \
 
 
 FROM hysds/base:latest
+
+MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
+LABEL description "Base Verdi image for HySDS"
+
+# git url to hysds dev puppet module
+ENV GIT_URL https://github.com/hysds/puppet-verdi/raw/docker-lite/install.sh
 
 # provision via puppet
 RUN set -ex \
