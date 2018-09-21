@@ -36,4 +36,15 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/yum
 
+# copy ops home
 COPY --from=0 /home/ops /home/ops
+
+# link celeryconfig
+RUN set -ex \
+ && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py
+
+# set entrypoint
+COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+EXPOSE 80 443 8085 9001
+CMD ["supervisord"]
