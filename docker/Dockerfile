@@ -37,7 +37,7 @@ RUN set -ex \
  && sudo rm -rf /var/cache/yum
 
 # copy ops home
-COPY --from=0 /home/ops /home/ops
+COPY --chown=ops:ops --from=0 /home/ops /home/ops
 
 # link celeryconfig
 RUN set -ex \
