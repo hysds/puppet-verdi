@@ -2,67 +2,11 @@
 # verdi class
 #####################################################
 
-class verdi {
+class verdi inherits hysds_base {
 
   #####################################################
-  # create groups and users
+  # copy user files
   #####################################################
-  
-  #notify { $user: }
-  if $user == undef {
-
-    $user = 'ops'
-    $group = 'ops'
-
-    group { $group:
-      ensure     => present,
-    }
-  
-
-    user { $user:
-      ensure     => present,
-      gid        =>  $group,
-      shell      => '/bin/bash',
-      home       => "/home/$user",
-      managehome => true,
-      require    => Group[$group],
-    }
-
-
-    file { "/home/$user":
-      ensure  => directory,
-      owner   => $user,
-      group   => $group,
-      mode    => 0755,
-      require => User[$user],
-    }
-
-
-    inputrc { 'root':
-      home    => '/root',
-    }
-
-
-    inputrc { $user:
-      home    => "/home/$user",
-      require => User[$user],
-    }
-
-
-  }
-
-
-  file { "/home/$user/.git_oauth_token":
-    ensure  => file,
-    content  => template('verdi/git_oauth_token'),
-    owner   => $user,
-    group   => $group,
-    mode    => 0600,
-    require => [
-                User[$user],
-               ],
-  }
-
 
   file { "/home/$user/.bash_profile":
     ensure  => present,
@@ -95,10 +39,8 @@ class verdi {
   package {
     'mailx': ensure => present;
     'httpd': ensure => present;
-    'httpd-devel': ensure => present;
     'mod_ssl': ensure => present;
     'sysstat': ensure => present;
-    'libsysstat-devel': ensure => present;
   }
 
 
@@ -113,54 +55,6 @@ class verdi {
   }
 
   
-  #####################################################
-  # install oracle java and set default
-  #####################################################
-
-  $jdk_rpm_file = "jdk-8u60-linux-x64.rpm"
-  $jdk_rpm_path = "/etc/puppet/modules/verdi/files/$jdk_rpm_file"
-  $jdk_pkg_name = "jdk1.8.0_60"
-  $java_bin_path = "/usr/java/$jdk_pkg_name/jre/bin/java"
-
-
-  cat_split_file { "$jdk_rpm_file":
-    install_dir => "/etc/puppet/modules/verdi/files",
-    owner       =>  $user,
-    group       =>  $group,
-  }
-
-
-  package { "$jdk_pkg_name":
-    provider => rpm,
-    ensure   => present,
-    source   => $jdk_rpm_path,
-    notify   => Exec['ldconfig'],
-    require     => Cat_split_file["$jdk_rpm_file"],
-  }
-
-
-  update_alternatives { 'java':
-    path     => $java_bin_path,
-    require  => [
-                 Package[$jdk_pkg_name],
-                 Exec['ldconfig']
-                ],
-  }
-
-
-  #####################################################
-  # get integer memory size in MB
-  #####################################################
-
-  if '.' in $::memorysize_mb {
-    $ms = split("$::memorysize_mb", '[.]')
-    $msize_mb = $ms[0]
-  }
-  else {
-    $msize_mb = $::memorysize_mb
-  }
-
-
   #####################################################
   # configure webdav for work directory
   #####################################################
