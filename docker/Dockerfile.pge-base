@@ -1,7 +1,7 @@
 FROM hysds/dev:latest
 
 # git url to hysds dev puppet module
-ENV GIT_URL https://github.com/hysds/puppet-verdi/raw/docker-lite/install.sh
+ENV GIT_URL https://github.com/hysds/puppet-verdi/raw/docker/install.sh
 
 # provision via puppet
 RUN set -ex \
@@ -20,7 +20,7 @@ RUN set -ex \
 FROM hysds/base:latest
 
 # git url to hysds dev puppet module
-ENV GIT_URL https://github.com/hysds/puppet-verdi/raw/docker-lite/install.sh
+ENV GIT_URL https://github.com/hysds/puppet-verdi/raw/docker/install.sh
 
 # provision via puppet
 RUN set -ex \
