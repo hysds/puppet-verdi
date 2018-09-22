@@ -14,7 +14,9 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/yum \
  && cd $HOME \
- && ./install_hysds.sh
+ && ./install_hysds.sh \
+ && rm -rf $HOME/verdi/ops/*/.git* \
+ && rm -rf $HOME/.cache
 
 
 FROM hysds/base:latest
