@@ -9,3 +9,4 @@ TAG=$1
 
 docker build --rm --force-rm -t hysds/verdi:${TAG} -f docker/Dockerfile . || exit 1
 docker build --rm --force-rm -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base . || exit 1
+docker build --rm --force-rm -t hysds/cuda-pge-base:${TAG} -f docker/Dockerfile.cuda-pge-base . || exit 1
