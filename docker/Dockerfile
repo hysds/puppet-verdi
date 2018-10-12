@@ -47,12 +47,16 @@ RUN set -ex \
 # copy ops home
 COPY --chown=ops:ops --from=0 /home/ops /home/ops
 
-# link celeryconfig
+# link configs
 RUN set -ex \
  && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py
+
+# set default supervisord conf and copy includes
+COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
+COPY --chown=ops:ops docker/conf.d /home/ops/verdi/etc/conf.d
 
 # set entrypoint
 COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
-EXPOSE 80 443 8085 9001
+EXPOSE 22 80 443 8085 9001
 CMD ["supervisord"]
