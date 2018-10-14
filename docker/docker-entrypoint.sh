@@ -22,6 +22,12 @@ if [ -e "/home/ops/verdi/bin/activate" ]; then
   source /home/ops/verdi/bin/activate
 fi
 
+# extract beefed autoindex
+if [ ! -d "/data/work/.index-style" ]; then
+  mkdir -p /data/work
+  tar -C /data/work -xjf /home/ops/verdi/src/beefed-autoindex-open_in_new_win.tbz2
+fi
+
 if [[ "$#" -eq 1  && "$@" == "supervisord" ]]; then
   set -- supervisord -n
 else
