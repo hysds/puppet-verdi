@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 # get group id
 GID=$(id -g)
