@@ -54,7 +54,7 @@ class verdi inherits hysds_base {
     refreshonly => true,
   }
 
-  
+
   #####################################################
   # configure webdav for work directory
   #####################################################
@@ -117,7 +117,7 @@ class verdi inherits hysds_base {
     content => template('verdi/start_verdi'),
     require => File["$verdi_dir/bin"],
   }
- 
+
 
   file { "$verdi_dir/bin/stop_verdi":
     ensure  => present,
@@ -132,6 +132,13 @@ class verdi inherits hysds_base {
   #####################################################
   # secure and configure httpd
   #####################################################
+
+  file { "/etc/httpd/conf.d/ssl.conf":
+    ensure  => present,
+    content => template('verdi/ssl.conf'),
+    mode    => 0644,
+    require => Package['httpd'],
+  }
 
   file { "/etc/httpd/conf.d/autoindex.conf":
     ensure  => present,
