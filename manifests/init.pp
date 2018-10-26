@@ -157,6 +157,14 @@ class verdi inherits hysds_base {
   }
 
 
+  file { "/etc/httpd/conf.d/ssl.conf":
+    ensure  => present,
+    content => template('verdi/ssl.conf'),
+    mode    => 0644,
+    require => Package['httpd'],
+  }
+
+
   file { '/var/www/html/index.html':
     ensure  => file,
     content  => template('verdi/index.html'),
