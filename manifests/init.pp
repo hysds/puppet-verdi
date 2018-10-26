@@ -272,6 +272,14 @@ class verdi {
   }
 
 
+  file { "/etc/httpd/conf.d/ssl.conf":
+    ensure  => present,
+    content => template('verdi/ssl.conf'),
+    mode    => 0644,
+    require => Package['httpd'],
+  }
+
+
   file { '/var/www/html/index.html':
     ensure  => file,
     content  => template('verdi/index.html'),
@@ -289,6 +297,7 @@ class verdi {
                    File['/etc/httpd/conf.d/autoindex.conf'],
                    File['/etc/httpd/conf.d/hysds_dav.conf'],
                    File['/etc/httpd/conf.d/welcome.conf'],
+                   File['/etc/httpd/conf.d/ssl.conf'],
                    File['/var/www/html/index.html'],
                    Exec['daemon-reload'],
                   ],
