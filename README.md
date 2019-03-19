@@ -11,5 +11,5 @@ Create a base CentOS7 image as described [here](https://github.com/hysds/hysds-f
 ## Installation
 As _root_ run:
 ```
-bash < <(curl -skL https://github.com/hysds/puppet-verdi/raw/master/install.sh)
+bash < <(curl -skL https://github.com/hysds/puppet-verdi/raw/python3/install.sh)
 ```
