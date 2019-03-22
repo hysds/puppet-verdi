@@ -93,6 +93,11 @@ cd $OPS/$PACKAGE
 pip install -U pyasn1
 pip install -U pyasn1-modules
 pip install -U python-dateutil
+pip install azure
+pip install msrest
+pip install msrestazure
+pip install azure-mgmt
+pip install azure-cli
 pip install -e .
 if [ "$?" -ne 0 ]; then
   echo "Failed to run 'pip install -e .' for $PACKAGE."
