@@ -34,7 +34,7 @@ fi
 cd $HOME
 PACKAGE=hysds-framework
 if [ ! -d "$HOME/$PACKAGE" ]; then
-  git clone -b $release ${GIT_URL}/hysds/${PACKAGE}.git
+  git clone ${GIT_URL}/hysds/${PACKAGE}.git
 fi
 cd $HOME/$PACKAGE
 if [ "$release" = "develop" ]; then
