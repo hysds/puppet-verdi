@@ -18,7 +18,7 @@ release=$1
 
 
 # print out commands and exit on any errors
-set -ex
+set -e
 
 # set oauth token
 OAUTH_CFG="$HOME/.git_oauth_token"

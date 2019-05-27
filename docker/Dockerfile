@@ -11,7 +11,7 @@ ARG RELEASE=develop
 ADD https://api.github.com/repos/hysds/puppet-verdi/git/refs/heads/docker version.json
 
 # provision via puppet
-RUN --mount=type=secret,id=git_oauth_token,dst=${HOME}/.git_oauth_token source $HOME/.git_oauth_token \
+RUN --mount=type=secret,id=git_oauth_token cp /run/secrets/git_oauth_token $HOME/.git_oauth_token \
  && set -ex \
  && sudo yum update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
