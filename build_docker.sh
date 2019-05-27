@@ -8,6 +8,10 @@ fi
 TAG=$1
 
 
+# enable docker buildkit to allow build secrets
+export DOCKER_BUILDKIT=1
+
+
 # set oauth token to bypass github API rate limits
 OAUTH_CFG="$HOME/.git_oauth_token"
 if [ -e "$OAUTH_CFG" ]; then
