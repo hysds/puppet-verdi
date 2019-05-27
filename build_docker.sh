@@ -20,12 +20,12 @@ fi
 
 
 # build
-docker build --no-cache --progress=plain --rm --force-rm \
+docker build --progress=plain --rm --force-rm \
   -t hysds/verdi:${TAG} -f docker/Dockerfile --build-arg RELEASE=${TAG} \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
-docker build --no-cache --progress=plain --rm --force-rm \
+docker build --progress=plain --rm --force-rm \
   -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base \
   --build-arg RELEASE=${TAG} --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
-docker build --no-cache --progress=plain --rm --force-rm \
+docker build --progress=plain --rm --force-rm \
   -t hysds/cuda-pge-base:${TAG} -f docker/Dockerfile.cuda-pge-base \
   --build-arg RELEASE=${TAG} --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
