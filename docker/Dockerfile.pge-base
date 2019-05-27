@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:1.0-experimental
 FROM hysds/dev:latest
 
 # git url to hysds dev puppet module
@@ -10,7 +11,8 @@ ARG RELEASE=develop
 ADD https://api.github.com/repos/hysds/puppet-verdi/git/refs/heads/docker version.json
 
 # provision via puppet
-RUN set -ex \
+RUN --mount=type=secret,id=git_oauth_token,dst=$HOME/.git_oauth_token source $HOME/.git_oauth_token \
+ && set -ex \
  && sudo yum update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
