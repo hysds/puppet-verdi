@@ -57,3 +57,7 @@ if [ ! -d "$WORK_DIR/.index-style" ]; then
   cd $WORK_DIR
   tar xvfj $VERDI_DIR/src/beefed-autoindex-open_in_new_win.tbz2
 fi
+
+
+# cleanup pkgs
+rm -rf $VERDI_DIR/pkgs/*
