@@ -26,6 +26,8 @@ gosu 0:0 chown $UID:$GID $HOME 2>/dev/null || true
 gosu 0:0 chown -R $UID:$GID $HOME/.[!.]* 2>/dev/null || true
 
 # update ownership of verdi files/dirs
+gosu 0:0 chown $UID:$GID $HOME/verdi 2>/dev/null || true
+gosu 0:0 chown $UID:$GID $HOME/verdi/ops 2>/dev/null || true
 gosu 0:0 chown -R $UID:$GID $HOME/verdi/etc 2>/dev/null || true
 gosu 0:0 chown -R $UID:$GID $HOME/verdi/log 2>/dev/null || true
 gosu 0:0 chown -R $UID:$GID $HOME/verdi/run 2>/dev/null || true
