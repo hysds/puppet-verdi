@@ -52,6 +52,6 @@ RUN set -ex \
 COPY --chown=ops:ops --from=0 /home/ops /home/ops
 
 # set entrypoint
-COPY docker/pge-docker-entrypoint.sh /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY docker/entrypoint* /
+ENTRYPOINT ["/entrypoint-pge.sh"]
 CMD ["/bin/bash", "--login"]
