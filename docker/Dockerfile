@@ -60,7 +60,7 @@ COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.con
 COPY --chown=ops:ops docker/conf.d /home/ops/verdi/etc/conf.d
 
 # set entrypoint
-COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY docker/entrypoint* /
+ENTRYPOINT ["/entrypoint-verdi.sh"]
 EXPOSE 22 80 443 8085 9001
 CMD ["supervisord"]
