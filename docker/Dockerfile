@@ -44,6 +44,7 @@ LABEL description="HySDS verdi image"
 # get org and branch
 ARG ORG
 ARG BRANCH
+ARG BASE_BRANCH
 
 # git url to hysds verdi puppet module
 ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
