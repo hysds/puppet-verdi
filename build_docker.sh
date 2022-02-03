@@ -25,16 +25,16 @@ fi
 # build
 docker build --progress=plain --rm --force-rm \
   -t hysds/verdi:${TAG} -f docker/Dockerfile --build-arg HYSDS_RELEASE=${HYSDS_RELEASE} \
-  --build-arg TAG=${TAG} --build-arg ORG=${ORG} --build-arg BRANCH=${BRANCH} \
+  --build-arg TAG=${HYSDS_RELEASE} --build-arg ORG=${ORG} --build-arg BRANCH=${BRANCH} \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
 docker build --progress=plain --rm --force-rm \
   -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base \
-  --build-arg TAG=${TAG} --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
+  --build-arg TAG=${HYSDS_RELEASE} --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
 docker build --progress=plain --rm --force-rm \
   -t hysds/cuda-pge-base:${TAG} -f docker/Dockerfile.cuda-pge-base \
   --build-arg HYSDS_RELEASE=${HYSDS_RELEASE} \
-  --build-arg TAG=${TAG} --build-arg ORG=${ORG} --build-arg BRANCH=${BRANCH} \
+  --build-arg TAG=${HYSDS_RELEASE} --build-arg ORG=${ORG} --build-arg BRANCH=${BRANCH} \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
