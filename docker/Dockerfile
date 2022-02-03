@@ -5,6 +5,8 @@ FROM hysds/dev:${TAG}
 # get org and branch
 ARG ORG
 ARG BRANCH
+ARG FRAMEWORK_BRANCH
+ARG BASE_BRANCH
 
 # git url to hysds verdi puppet module
 ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
@@ -22,13 +24,13 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && sudo dnf update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
- && sudo /tmp/install.sh ${ORG} ${BRANCH} \
+ && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
  && sudo rm -rf /etc/puppetlabs/code/modules/* /mnt/swapfile \
  && sudo dnf clean all \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/dnf \
  && cd $HOME \
- && ./install_hysds.sh ${HYSDS_RELEASE} \
+ && ./install_hysds.sh ${FRAMEWORK_BRANCH} ${HYSDS_RELEASE} \
  && rm -rf $HOME/verdi/ops/*/.git* \
  && rm -rf $HOME/.cache \
  && rm -rf $HOME/.git_oauth_token
@@ -51,7 +53,7 @@ RUN set -ex \
  && sudo dnf update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
- && sudo /tmp/install.sh ${ORG} ${BRANCH} \
+ && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
  && sudo rm -rf /etc/puppetlabs/code/modules/* /mnt/swapfile \
  && sudo dnf clean all \
  && sudo rm -f /tmp/install.sh \
