@@ -13,7 +13,7 @@ class verdi inherits hysds_base {
     content => template('verdi/bash_profile'),
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     require => User[$user],
   }
 
@@ -63,7 +63,7 @@ class verdi inherits hysds_base {
     ensure  => file,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source => 'puppet:///modules/verdi/beefed-autoindex-open_in_new_win.tbz2',
     require => [
         File["$verdi_dir/src"],
@@ -81,7 +81,7 @@ class verdi inherits hysds_base {
     content => template('verdi/install_hysds.sh'),
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     require => User[$user],
   }
 
@@ -94,7 +94,7 @@ class verdi inherits hysds_base {
     ensure  => directory,
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     require => User[$user],
   }
 
@@ -103,7 +103,7 @@ class verdi inherits hysds_base {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     content => template('verdi/verdid'),
     require => File["$verdi_dir/bin"],
   }
@@ -113,7 +113,7 @@ class verdi inherits hysds_base {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     content => template('verdi/start_verdi'),
     require => File["$verdi_dir/bin"],
   }
@@ -123,7 +123,7 @@ class verdi inherits hysds_base {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     content => template('verdi/stop_verdi'),
     require => File["$verdi_dir/bin"],
   }
@@ -136,7 +136,7 @@ class verdi inherits hysds_base {
   file { "/etc/httpd/conf.d/autoindex.conf":
     ensure  => present,
     content => template('verdi/autoindex.conf'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
@@ -144,7 +144,7 @@ class verdi inherits hysds_base {
   file { "/etc/httpd/conf.d/hysds_dav.conf":
     ensure  => present,
     content => template('verdi/hysds_dav.conf'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
@@ -152,7 +152,7 @@ class verdi inherits hysds_base {
   file { "/etc/httpd/conf.d/welcome.conf":
     ensure  => present,
     content => template('verdi/welcome.conf'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
@@ -160,7 +160,7 @@ class verdi inherits hysds_base {
   file { "/etc/httpd/conf.d/ssl.conf":
     ensure  => present,
     content => template('verdi/ssl.conf'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
@@ -168,7 +168,7 @@ class verdi inherits hysds_base {
   file { '/var/www/html/index.html':
     ensure  => file,
     content  => template('verdi/index.html'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
