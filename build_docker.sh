@@ -38,7 +38,7 @@ docker build --progress=plain --rm --force-rm \
 docker system prune -f || :
 docker build --progress=plain --rm --force-rm \
   -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base \
-  --build-arg TAG=${BASE_IMAGE_TAG} \
+  --build-arg TAG=${TAG} \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
 docker build --progress=plain --rm --force-rm \
