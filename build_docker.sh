@@ -27,7 +27,7 @@ fi
 
 # build
 docker build --progress=plain --rm --force-rm \
-  -t hysds/verdi:${TAG} -f docker/Dockerfile \
+  -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base \
   --build-arg FRAMEWORK_BRANCH=${FRAMEWORK_BRANCH} \
   --build-arg HYSDS_RELEASE=${HYSDS_RELEASE} \
   --build-arg TAG=${BASE_IMAGE_TAG} \
@@ -37,7 +37,7 @@ docker build --progress=plain --rm --force-rm \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
 docker build --progress=plain --rm --force-rm \
-  -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base \
+  -t hysds/verdi:${TAG} -f docker/Dockerfile \
   --build-arg TAG=${TAG} \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
