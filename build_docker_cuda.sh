@@ -13,6 +13,7 @@ HYSDS_RELEASE=$5
 BASE_IMAGE_TAG=$6
 BASE_BRANCH=$7
 
+
 # enable docker buildkit to allow build secrets
 export DOCKER_BUILDKIT=1
 
@@ -26,17 +27,12 @@ fi
 
 # build
 docker build --progress=plain --rm --force-rm \
-  -t hysds/pge-base:${TAG} -f docker/Dockerfile.pge-base \
+  -t hysds/cuda-pge-base:${TAG} -f docker/Dockerfile.cuda-pge-base \
   --build-arg FRAMEWORK_BRANCH=${FRAMEWORK_BRANCH} \
   --build-arg HYSDS_RELEASE=${HYSDS_RELEASE} \
   --build-arg TAG=${BASE_IMAGE_TAG} \
   --build-arg ORG=${ORG} \
   --build-arg BRANCH=${BRANCH} \
   --build-arg BASE_BRANCH=${BASE_BRANCH} \
-  --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
-docker system prune -f || :
-docker build --progress=plain --rm --force-rm \
-  -t hysds/verdi:${TAG} -f docker/Dockerfile \
-  --build-arg TAG=${TAG} \
   --secret id=git_oauth_token,src=$OAUTH_CFG . || exit 1
 docker system prune -f || :
