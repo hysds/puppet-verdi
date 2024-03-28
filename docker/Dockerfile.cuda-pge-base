@@ -12,10 +12,13 @@ ARG BASE_BRANCH
 ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
 
 # get release to install
-ARG HYSDS_RELEASE=develop
+ARG HYSDS_RELEASE=HC-522
 
 # add latest repo version to invalidate cache
 ADD https://api.github.com/repos/${ORG}/puppet-verdi/git/refs/heads/${BRANCH} version.json
+
+# set HOME explicitly
+ENV HOME /home/ops
 
 # provision via puppet
 RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token $HOME/.git_oauth_token \
