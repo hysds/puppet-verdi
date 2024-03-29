@@ -7,12 +7,11 @@ ARG ORG
 ARG BRANCH
 ARG FRAMEWORK_BRANCH
 ARG BASE_BRANCH
+# get release to install
+ARG HYSDS_RELEASE
 
 # git url to hysds verdi puppet module
 ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
-
-# get release to install
-ARG HYSDS_RELEASE=HC-522
 
 # add latest repo version to invalidate cache
 ADD https://api.github.com/repos/${ORG}/puppet-verdi/git/refs/heads/${BRANCH} version.json
