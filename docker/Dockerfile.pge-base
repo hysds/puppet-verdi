@@ -63,6 +63,23 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/dnf
 
+# install podman
+yum -y install podman containers-common fuse-overlayfs --exclude container-selinux; \
+rm -rf /var/cache /var/log/dnf* /var/log/yum.*
+
+RUN useradd podman; \
+echo podman:10000:5000 > /etc/subuid; \
+echo podman:10000:5000 > /etc/subgid;
+
+ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
+ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/podman/.config/containers/containers.conf
+RUN chown podman:podman -R /home/podman
+# chmod containers.conf and adjust storage.conf to enable Fuse storage.
+RUN chmod 644 /etc/containers/containers.conf;
+RUN mkdir -p /var/lib/shared/overlay-images /var/lib/shared/overlay-layers /var/lib/shared/vfs-images /var/lib/shared/vfs-layers; touch /var/lib/shared/overlay-images/images.lock; touch /var/lib/shared/overlay-layers/layers.lock; touch /var/lib/shared/vfs-images/images.lock; t
+ouch /var/lib/shared/vfs-layers/layers.lock
+ENV _CONTAINERS_USERNS_CONFIGURED=""
+
 # copy ops home
 COPY --chown=ops:ops --from=0 /home/ops /home/ops
 
