@@ -52,7 +52,7 @@ ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
 RUN set -ex \
  && sudo dnf update -y \
  && sudo yum -y reinstall shadow-utils \
- && sudo yum -y install podman containers-common fuse-overlayfs --exclude container-selinux \
+ && sudo yum -y install podman containers-common fuse-overlayfs --exclude container-selinux --allowerasing \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
  && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
