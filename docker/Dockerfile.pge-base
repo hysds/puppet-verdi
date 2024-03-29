@@ -51,15 +51,15 @@ ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
 # provision via puppet
 RUN set -ex \
  && sudo dnf update -y \
+ && sudo yum -y reinstall shadow-utils \
+ && sudo yum -y install podman containers-common fuse-overlayfs --exclude container-selinux \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
  && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
  && sudo rm -rf /etc/puppetlabs/code/modules/* /mnt/swapfile \
  && sudo dnf clean all \
  && sudo rm -f /tmp/install.sh \
- && sudo rm -rf /var/cache/dnf \
- && sudo yum -y reinstall shadow-utils \
- && sudo yum -y install podman containers-common fuse-overlayfs --exclude container-selinux
+ && sudo rm -rf /var/cache/dnf
 
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/ops/.config/containers/containers.conf
