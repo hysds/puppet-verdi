@@ -23,7 +23,7 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && sudo dnf update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
- && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
+# && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
  && sudo rm -rf /etc/puppetlabs/code/modules/* /mnt/swapfile \
  && sudo dnf clean all \
  && sudo rm -f /tmp/install.sh \
@@ -57,27 +57,30 @@ RUN set -ex \
  && sudo rm -rf /etc/puppetlabs/code/modules/* /mnt/swapfile \
  && sudo dnf clean all \
  && sudo rm -f /tmp/install.sh \
- && sudo rm -rf /var/cache/dnf
+ && sudo rm -rf /var/cache/dnf \
+ && sudo yum -y reinstall shadow-utils \
+ && sudo yum -y install podman containers-common fuse-overlayfs --exclude container-selinux
+
+ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
+ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/podman/.config/containers/containers.conf
+RUN mkdir -p /var/lib/shared/overlay-images /var/lib/shared/overlay-layers /var/lib/shared/vfs-images /var/lib/shared/vfs-layers; touch /var/lib/shared/overlay-images/images.lock; touch /var/lib/shared/overlay-layers/layers.lock; touch /var/lib/shared/vfs-images/images.lock; touch /var/lib/shared/vfs-layers/layers.lock
+ENV _CONTAINERS_USERNS_CONFIGURED=""
 
 # copy ops home
 COPY --chown=ops:ops --from=0 /home/ops /home/ops
 
-RUN dnf -y update; yum -y reinstall shadow-utils; \
 
-# install podman
-yum -y install podman containers-common fuse-overlayfs --exclude container-selinux; \
+#RUN useradd podman; \
+#echo podman:10000:5000 >> /etc/subuid; \
+#echo podman:10000:5000 >> /etc/subgid;
 
-RUN useradd podman; \
-echo podman:10000:5000 >> /etc/subuid; \
-echo podman:10000:5000 >> /etc/subgid;
-
-ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
-ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/podman/.config/containers/containers.conf
-RUN chown podman:podman -R /home/podman
+#ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
+#ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/podman/.config/containers/containers.conf
+#RUN chown podman:podman -R /home/podman
 # chmod containers.conf and adjust storage.conf to enable Fuse storage.
-RUN chmod 644 /etc/containers/containers.conf;
-RUN mkdir -p /var/lib/shared/overlay-images /var/lib/shared/overlay-layers /var/lib/shared/vfs-images /var/lib/shared/vfs-layers; touch /var/lib/shared/overlay-images/images.lock; touch /var/lib/shared/overlay-layers/layers.lock; touch /var/lib/shared/vfs-images/images.lock; touch /var/lib/shared/vfs-layers/layers.lock
-ENV _CONTAINERS_USERNS_CONFIGURED=""
+#RUN chmod 644 /etc/containers/containers.conf;
+#RUN mkdir -p /var/lib/shared/overlay-images /var/lib/shared/overlay-layers /var/lib/shared/vfs-images /var/lib/shared/vfs-layers; touch /var/lib/shared/overlay-images/images.lock; touch /var/lib/shared/overlay-layers/layers.lock; touch /var/lib/shared/vfs-images/images.lock; touch /var/lib/shared/vfs-layers/layers.lock
+#ENV _CONTAINERS_USERNS_CONFIGURED=""
 
 # set entrypoint
 COPY docker/entrypoint* /
