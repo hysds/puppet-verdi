@@ -69,8 +69,8 @@ yum -y install podman containers-common fuse-overlayfs --exclude container-selin
 rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
 RUN useradd podman; \
-echo podman:10000:5000 > /etc/subuid; \
-echo podman:10000:5000 > /etc/subgid;
+echo podman:10000:5000 >> /etc/subuid; \
+echo podman:10000:5000 >> /etc/subgid;
 
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/podman/.config/containers/containers.conf
