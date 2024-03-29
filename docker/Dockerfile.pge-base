@@ -8,7 +8,7 @@ ARG BRANCH
 ARG FRAMEWORK_BRANCH
 ARG BASE_BRANCH
 # get release to install
-ARG HYSDS_RELEASE
+ARG HYSDS_RELEASE=develop
 
 # git url to hysds verdi puppet module
 ENV GIT_URL https://github.com/${ORG}/puppet-verdi/raw/${BRANCH}/install.sh
