@@ -63,6 +63,9 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/dnf
 
+FROM registry.fedoraproject.org/fedora:latest
+RUN dnf -y update; yum -y reinstall shadow-utils; \
+
 # install podman
 yum -y install podman containers-common fuse-overlayfs --exclude container-selinux; \
 rm -rf /var/cache /var/log/dnf* /var/log/yum.*
