@@ -60,10 +60,13 @@ RUN sudo rm -f /tmp/install.sh
 RUN sudo rm -rf /var/cache/dnf
 RUN sudo yum -y reinstall shadow-utils
 RUN sudo yum -y erase docker-ce
+RUN sudo yum module install container-tools
 RUN sudo yum -y install podman containers-common fuse-overlayfs podman-docker --exclude container-selinux
 
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/ops/.config/containers/containers.conf
+RUN sudo chmod 644 /etc/containers/containers.conf;
+RUN sudo chown -R ops:ops /home/ops/.config
 RUN sudo mkdir -p /var/lib/shared/overlay-images /var/lib/shared/overlay-layers /var/lib/shared/vfs-images /var/lib/shared/vfs-layers
 RUN sudo touch /var/lib/shared/overlay-images/images.lock
 RUN sudo touch /var/lib/shared/overlay-layers/layers.lock
