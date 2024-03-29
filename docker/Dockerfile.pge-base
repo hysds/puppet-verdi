@@ -23,7 +23,7 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && sudo dnf update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
-# && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
+ && sudo /tmp/install.sh ${ORG} ${BRANCH} ${BASE_BRANCH} \
  && sudo rm -rf /etc/puppetlabs/code/modules/* /mnt/swapfile \
  && sudo dnf clean all \
  && sudo rm -f /tmp/install.sh \
@@ -62,7 +62,7 @@ RUN set -ex \
  && sudo yum -y install podman containers-common fuse-overlayfs --exclude container-selinux
 
 ADD https://raw.githubusercontent.com/containers/image_build/main/podman/containers.conf /etc/containers/containers.conf
-ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/podman/.config/containers/containers.conf
+ADD https://raw.githubusercontent.com/containers/image_build/main/podman/podman-containers.conf /home/ops/.config/containers/containers.conf
 RUN mkdir -p /var/lib/shared/overlay-images /var/lib/shared/overlay-layers /var/lib/shared/vfs-images /var/lib/shared/vfs-layers; touch /var/lib/shared/overlay-images/images.lock; touch /var/lib/shared/overlay-layers/layers.lock; touch /var/lib/shared/vfs-images/images.lock; touch /var/lib/shared/vfs-layers/layers.lock
 ENV _CONTAINERS_USERNS_CONFIGURED=""
 
