@@ -77,6 +77,10 @@ ENV _CONTAINERS_USERNS_CONFIGURED=""
 # copy ops home
 COPY --chown=ops:ops --from=0 /home/ops /home/ops
 
+USER root
+RUN echo 'ops:10000:5000' >> /etc/subuid
+RUN echo 'ops:1001:5000' >> /etc/subgid
+USER ops
 
 #RUN useradd podman; \
 #echo podman:10000:5000 >> /etc/subuid; \
