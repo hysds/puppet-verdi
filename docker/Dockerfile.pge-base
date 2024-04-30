@@ -30,18 +30,6 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && sudo rm -rf /var/cache/dnf \
  && cd $HOME \
  && ./install_hysds.sh ${FRAMEWORK_BRANCH} ${HYSDS_RELEASE} \
- && mv $HOME/verdi/ops/sciflo $HOME/verdi/ops/sciflo.bak \
- && mv $HOME/verdi/ops/hysds $HOME/verdi/ops/hysds.bak \
- && cd $HOME/verdi/ops \
- && git clone https://github.com/hysds/hysds.git \
- && cd hysds \
- && git checkout -b HC-522 origin/HC-522 \
- && pip install -e . \
- && cd ../ \
- && git clone https://github.com/hysds/sciflo.git \
- && cd sciflo \
- && git checkout -b HC-522 origin/HC-522 \
- && pip install -e . \
  && rm -rf $HOME/verdi/ops/*/.git* \
  && rm -rf $HOME/.cache \
  && rm -rf $HOME/.git_oauth_token
