@@ -16,6 +16,7 @@ RUN set -ex \
  && cd hysds \
  && git checkout -b HC-522 origin/HC-522 \
  && pip install -e . \
+ && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py \
  && cd ../ \
  && git clone https://github.com/hysds/sciflo.git \
  && cd sciflo \
