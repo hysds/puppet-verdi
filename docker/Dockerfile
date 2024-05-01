@@ -8,6 +8,7 @@ LABEL description="HySDS verdi image"
 # link configs
 RUN set -ex \
  && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py \
+ && source /home/ops/.bash_profile \
  && mv $HOME/verdi/ops/sciflo $HOME/verdi/ops/sciflo.bak \
  && mv $HOME/verdi/ops/hysds $HOME/verdi/ops/hysds.bak \
  && cd $HOME/verdi/ops \
