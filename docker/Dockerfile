@@ -20,7 +20,7 @@ RUN set -ex \
  && git clone https://github.com/hysds/sciflo.git \
  && cd sciflo \
  && git checkout -b HC-522 origin/HC-522 \
- && pip install -e . \
+ && pip install -e .
 
 # set default supervisord conf and copy includes
 COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
