@@ -10,8 +10,8 @@ GID=$(id -g)
 gosu 0:0 usermod -d /tmp/${HOME} ops 2>/dev/null
 
 # update user and group ids
-gosu 0:0 groupmod -g $GID ops 2>/dev/null
-gosu 0:0 usermod -u $UID -g $GID ops 2>/dev/null
+#gosu 0:0 groupmod -g $GID ops 2>/dev/null
+#gosu 0:0 usermod -u $UID -g $GID ops 2>/dev/null
 #gosu 0:0 usermod -aG docker ops 2>/dev/null
 
 # restore home dir
