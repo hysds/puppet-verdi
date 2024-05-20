@@ -33,6 +33,9 @@ gosu 0:0 chown -R $UID:$GID $HOME/verdi/log 2>/dev/null || true
 gosu 0:0 chown -R $UID:$GID $HOME/verdi/run 2>/dev/null || true
 
 # update ownership of other files
-if [ -f /var/run/docker.sock ]; then
+if [ -e /var/run/docker.sock ]; then
+  # These groupmod/usermod commands are needed in order to start up httpd under sudo
+  gosu 0:0 groupmod -g $GID ops 2>/dev/null
+  gosu 0:0 usermod -u $UID -g $GID ops 2>/dev/null
   gosu 0:0 chown -R $UID:$GID /var/run/docker.sock 2>/dev/null || true
 fi
