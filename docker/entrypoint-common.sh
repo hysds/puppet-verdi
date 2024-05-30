@@ -10,11 +10,14 @@ GID=$(id -g)
 gosu 0:0 usermod -d /tmp/${HOME} ops 2>/dev/null
 
 # update user and group ids
-
-if id -u "docker" >/dev/null 2>&1; then
+if [ -e /var/run/docker.sock ]; then
+  # These groupmod/usermod commands are needed in order to start up httpd under sudo
+  gosu 0:0 groupmod -g $GID ops 2>/dev/null
+  gosu 0:0 usermod -u $UID -g $GID ops 2>/dev/null
+  # FIXME: Unsure if I should wrap this in an "if id -u "docker" >/dev/null 2>&1; then" clause
+  # instead
   gosu 0:0 usermod -aG docker ops 2>/dev/null
 fi
-
 
 # restore home dir
 gosu 0:0 usermod -d ${HOME} ops 2>/dev/null
@@ -32,9 +35,6 @@ gosu 0:0 chown -R $UID:$GID $HOME/verdi/run 2>/dev/null || true
 
 # update ownership of other files
 if [ -e /var/run/docker.sock ]; then
-  # These groupmod/usermod commands are needed in order to start up httpd under sudo
-  gosu 0:0 groupmod -g $GID ops 2>/dev/null
-  gosu 0:0 usermod -u $UID -g $GID ops 2>/dev/null
   gosu 0:0 chown -R $UID:$GID /var/run/docker.sock 2>/dev/null || true
 else
   # Assume podman
