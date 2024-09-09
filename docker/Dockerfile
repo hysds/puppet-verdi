@@ -1,13 +1,22 @@
 # syntax = docker/dockerfile:1.0-experimental
 ARG TAG=latest
-FROM hysds/pge-base:${TAG}
+FROM hysds/pge-base:HC-522-update
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
 LABEL description="HySDS verdi image"
 
 # link configs
 RUN set -ex \
- && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py
+ && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py \
+ && source /home/ops/.bash_profile \
+ && mv $HOME/verdi/ops/sciflo $HOME/verdi/ops/sciflo.bak \
+ && mv $HOME/verdi/ops/hysds $HOME/verdi/ops/hysds.bak \
+ && cd $HOME/verdi/ops \
+ && git clone https://github.com/hysds/hysds.git \
+ && cd hysds \
+ && git checkout -b HC-522-update origin/HC-522-update \
+ && pip install -e . \
+ && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py \
 
 # set default supervisord conf and copy includes
 COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
