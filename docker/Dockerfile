@@ -16,7 +16,7 @@ RUN set -ex \
  && cd hysds \
  && git checkout -b HC-522-update origin/HC-522-update \
  && pip install -e . \
- && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py \
+ && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py
 
 # set default supervisord conf and copy includes
 COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
