@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.0-experimental
-ARG TAG=latest
-FROM hysds/pge-base:HC-522-update
+ARG TAG=HC-522-update
+FROM hysds/pge-base:${TAG}
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
 LABEL description="HySDS verdi image"

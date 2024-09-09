@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.0-experimental
-ARG TAG=latest
-FROM hysds/dev:HC-522-update
+ARG TAG=HC-522-update
+FROM hysds/dev:${TAG}
 
 # get org and branch
 ARG ORG
