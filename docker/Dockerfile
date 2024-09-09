@@ -7,8 +7,8 @@ LABEL description="HySDS verdi image"
 
 # link configs
 RUN set -ex \
- && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py \
- && source /home/ops/.bash_profile \
+ && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py \
+ && source $HOME/.bash_profile \
  && mv $HOME/verdi/ops/sciflo $HOME/verdi/ops/sciflo.bak \
  && mv $HOME/verdi/ops/hysds $HOME/verdi/ops/hysds.bak \
  && cd $HOME/verdi/ops \
@@ -16,11 +16,11 @@ RUN set -ex \
  && cd hysds \
  && git checkout -b HC-522-update origin/HC-522-update \
  && pip install -e . \
- && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py
+ && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py
 
 # set default supervisord conf and copy includes
-COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
-COPY --chown=ops:ops docker/conf.d /home/ops/verdi/etc/conf.d
+COPY --chown=root:root docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
+COPY --chown=root:root docker/conf.d /home/ops/verdi/etc/conf.d
 
 # set entrypoint
 COPY docker/entrypoint* /
