@@ -19,8 +19,8 @@ RUN set -ex \
  && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py
 
 # set default supervisord conf and copy includes
-COPY --chown=root:root docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
-COPY --chown=root:root docker/conf.d /home/ops/verdi/etc/conf.d
+COPY --chown=root:root docker/supervisord.conf $HOME/verdi/etc/supervisord.conf
+COPY --chown=root:root docker/conf.d $HOME/verdi/etc/conf.d
 
 # set entrypoint
 COPY docker/entrypoint* /
