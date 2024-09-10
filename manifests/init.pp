@@ -17,7 +17,7 @@ class verdi inherits hysds_base {
     require => User[$root_user],
   }
 
-  file { "/$ops_user/.bash_profile":
+  file { "/home/$ops_user/.bash_profile":
     ensure  => present,
     content => template('verdi/bash_profile'),
     owner   => $ops_user,
