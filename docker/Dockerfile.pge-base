@@ -63,6 +63,9 @@ RUN set -ex \
 # copy ops home
 COPY --chown=root:root --from=0 /root /root
 
+# softlink to ops home
+RUN ln -s /root /home/ops
+
 # These are podman-specific things to set up the "root" in the container
 # (root is the host user from podman perspective)
 #USER root

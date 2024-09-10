@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # set HOME explicitly
-export HOME=/root
+if [ -e /var/run/docker.sock ]; then
+  export HOME=/home/ops
+else
+  export HOME=/root
+fi
 
 # get group id
 GID=$(id -g)
