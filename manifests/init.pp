@@ -69,8 +69,8 @@ class verdi inherits hysds_base {
 
   file { "$verdi_dir/src/beefed-autoindex-open_in_new_win.tbz2":
     ensure  => file,
-    owner   => $user,
-    group   => $group,
+    owner   => $root_user,
+    group   => $root_group,
     mode    => "0644",
     source => 'puppet:///modules/verdi/beefed-autoindex-open_in_new_win.tbz2',
     require => [
@@ -84,13 +84,13 @@ class verdi inherits hysds_base {
   # files in ops home
   #####################################################
 
-  file { "/$user/install_hysds.sh":
+  file { "/$root_user/install_hysds.sh":
     ensure  => present,
     content => template('verdi/install_hysds.sh'),
-    owner   => $user,
-    group   => $group,
+    owner   => $root_user,
+    group   => $root_group,
     mode    => "0755",
-    require => User[$user],
+    require => User[$root_user],
   }
 
 
@@ -100,17 +100,17 @@ class verdi inherits hysds_base {
           "$verdi_dir/src",
           "$verdi_dir/etc"]:
     ensure  => directory,
-    owner   => $user,
-    group   => $group,
+    owner   => $root_user,
+    group   => $root_group,
     mode    => "0755",
-    require => User[$user],
+    require => User[$root_user],
   }
 
 
   file { "$verdi_dir/bin/verdid":
     ensure  => present,
-    owner   => $user,
-    group   => $group,
+    owner   => $root_user,
+    group   => $root_group,
     mode    => "0755",
     content => template('verdi/verdid'),
     require => File["$verdi_dir/bin"],
@@ -119,8 +119,8 @@ class verdi inherits hysds_base {
 
   file { "$verdi_dir/bin/start_verdi":
     ensure  => present,
-    owner   => $user,
-    group   => $group,
+    owner   => $root_user,
+    group   => $root_group,
     mode    => "0755",
     content => template('verdi/start_verdi'),
     require => File["$verdi_dir/bin"],
@@ -129,8 +129,8 @@ class verdi inherits hysds_base {
 
   file { "$verdi_dir/bin/stop_verdi":
     ensure  => present,
-    owner   => $user,
-    group   => $group,
+    owner   => $root_user,
+    group   => $root_group,
     mode    => "0755",
     content => template('verdi/stop_verdi'),
     require => File["$verdi_dir/bin"],
