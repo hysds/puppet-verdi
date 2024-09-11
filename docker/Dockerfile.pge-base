@@ -63,16 +63,8 @@ RUN set -ex \
 # copy ops home
 COPY --chown=root:root --from=0 /root /root
 
-# These are podman-specific things to set up the "root" in the container
-# (root is the host user from podman perspective)
-#USER root
-#ENV USER root
-#ENV GROUP root
-
-#RUN rm -rf /root && ln -s /home/ops /root
-#WORKDIR /root/
-#VOLUME /root/.local/share/containers
-#RUN chown -R root:root /home/ops && chown -R root:root /root
+# softlink /root to /home/ops to maintain backwards compatability
+RUN rm -rf /home/ops && ln -s /root /home/ops
 
 # set entrypoint
 COPY docker/entrypoint* /
