@@ -60,11 +60,8 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/dnf
 
-# copy ops home
+# copy root
 COPY --chown=root:root --from=0 /root /root
-
-# softlink /root to /home/ops to maintain backwards compatability
-RUN rm -rf /home/ops && ln -s /root /home/ops
 
 # set entrypoint
 COPY docker/entrypoint* /

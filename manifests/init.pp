@@ -8,24 +8,14 @@ class verdi inherits hysds_base {
   # copy user files
   #####################################################
 
-  file { "/$root_user/.bash_profile":
+  file { "/$user/.bash_profile":
     ensure  => present,
     content => template('verdi/bash_profile'),
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0644",
-    require => User[$root_user],
+    require => User[$user],
   }
-
-  file { "/home/$ops_user/.bash_profile":
-    ensure  => present,
-    content => template('verdi/bash_profile'),
-    owner   => $ops_user,
-    group   => $ops_group,
-    mode    => "0644",
-    require => User[$ops_user],
-  }
-
 
   #####################################################
   # work directory
@@ -38,7 +28,7 @@ class verdi inherits hysds_base {
   # verdi directory
   #####################################################
 
-  $verdi_dir = "/$root_user/verdi"
+  $verdi_dir = "/$user/verdi"
 
   #####################################################
   # install packages
@@ -69,8 +59,8 @@ class verdi inherits hysds_base {
 
   file { "$verdi_dir/src/beefed-autoindex-open_in_new_win.tbz2":
     ensure  => file,
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0644",
     source => 'puppet:///modules/verdi/beefed-autoindex-open_in_new_win.tbz2',
     require => [
@@ -84,13 +74,13 @@ class verdi inherits hysds_base {
   # files in ops home
   #####################################################
 
-  file { "/$root_user/install_hysds.sh":
+  file { "/$user/install_hysds.sh":
     ensure  => present,
     content => template('verdi/install_hysds.sh'),
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0755",
-    require => User[$root_user],
+    require => User[$user],
   }
 
 
@@ -100,17 +90,17 @@ class verdi inherits hysds_base {
           "$verdi_dir/src",
           "$verdi_dir/etc"]:
     ensure  => directory,
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0755",
-    require => User[$root_user],
+    require => User[$user],
   }
 
 
   file { "$verdi_dir/bin/verdid":
     ensure  => present,
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0755",
     content => template('verdi/verdid'),
     require => File["$verdi_dir/bin"],
@@ -119,8 +109,8 @@ class verdi inherits hysds_base {
 
   file { "$verdi_dir/bin/start_verdi":
     ensure  => present,
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0755",
     content => template('verdi/start_verdi'),
     require => File["$verdi_dir/bin"],
@@ -129,8 +119,8 @@ class verdi inherits hysds_base {
 
   file { "$verdi_dir/bin/stop_verdi":
     ensure  => present,
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $user,
+    group   => $group,
     mode    => "0755",
     content => template('verdi/stop_verdi'),
     require => File["$verdi_dir/bin"],

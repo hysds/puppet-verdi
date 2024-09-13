@@ -60,19 +60,8 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/dnf
 
-# copy ops home
+# copy root
 COPY --chown=root:root --from=0 /root /root
-
-# These are podman-specific things to set up the "root" in the container
-# (root is the host user from podman perspective)
-#USER root
-#ENV USER root
-#ENV GROUP root
-
-#RUN rm -rf /root && ln -s /home/ops /root
-#WORKDIR /root/
-#VOLUME /root/.local/share/containers
-#RUN chown -R root:root /home/ops && chown -R root:root /root
 
 # set entrypoint
 COPY docker/entrypoint* /
