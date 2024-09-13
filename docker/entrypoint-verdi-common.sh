@@ -10,11 +10,11 @@ gosu 0:0 ssh-keygen -A 2>/dev/null
 #gosu 0:0 chown -R $UID:$GID /var/log/supervisor 2>/dev/null || true
 
 # unpack work dir style
-if [ ! -d "/data/work/.index-style" ]; then
-  gosu 0:0 mkdir -p /data/work
-  gosu 0:0 tar -C /data/work -xjf $HOME/verdi/src/beefed-autoindex-open_in_new_win.tbz2
-  gosu 0:0 chown -R $UID:$GID /data/work 2>/dev/null || true
-fi
+#if [ ! -d "/data/work/.index-style" ]; then
+#  gosu 0:0 mkdir -p /data/work
+#  gosu 0:0 tar -C /data/work -xjf $HOME/verdi/src/beefed-autoindex-open_in_new_win.tbz2
+#  gosu 0:0 chown -R $UID:$GID /data/work 2>/dev/null || true
+#fi
 
 # source bash profile
 source $HOME/.bash_profile
