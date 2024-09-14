@@ -51,7 +51,7 @@ GID=$(id -g)
 #gosu 0:0 usermod -d ${HOME} ops 2>/dev/null
 
 # update ownership of other files
-#if [ -e /var/run/docker.sock ]; then
+if [ -e /var/run/docker.sock ]; then
   # update ownership of home dir and hidden files/dirs
 #  gosu 0:0 chown $UID:$GID $HOME 2>/dev/null || true
 #  gosu 0:0 chown -R $UID:$GID $HOME/.[!.]* 2>/dev/null || true
@@ -62,7 +62,7 @@ GID=$(id -g)
 #  gosu 0:0 chown -R $UID:$GID $HOME/verdi/etc 2>/dev/null || true
 #  gosu 0:0 chown -R $UID:$GID $HOME/verdi/log 2>/dev/null || true
 #  gosu 0:0 chown -R $UID:$GID $HOME/verdi/run 2>/dev/null || true
-#  gosu 0:0 chown -R $UID:$GID /var/run/docker.sock 2>/dev/null || true
+  gosu 0:0 chown -R $UID:$GID /var/run/docker.sock 2>/dev/null || true
 #else
   # Assume podman
   # We need to give sudo priviliges to start up httpd to the host user
@@ -71,4 +71,4 @@ GID=$(id -g)
 #    gosu 0:0 su root -c "echo '${HOST_USER} ALL=NOPASSWD: /usr/sbin/apachectl' >> /etc/sudoers.d/90-cloudimg-ops"
 #    gosu 0:0 su root -c "chmod u-w /etc/sudoers.d/90-cloudimg-ops"
 #  fi
-#fi
+fi
