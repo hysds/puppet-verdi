@@ -8,7 +8,7 @@ class verdi inherits hysds_base {
   # copy user files
   #####################################################
 
-  file { "/home/$user/.bash_profile":
+  file { "/$user/.bash_profile":
     ensure  => present,
     content => template('verdi/bash_profile'),
     owner   => $user,
@@ -16,7 +16,6 @@ class verdi inherits hysds_base {
     mode    => "0644",
     require => User[$user],
   }
-
 
   #####################################################
   # work directory
@@ -29,8 +28,7 @@ class verdi inherits hysds_base {
   # verdi directory
   #####################################################
 
-  $verdi_dir = "/home/$user/verdi"
-
+  $verdi_dir = "/$user/verdi"
 
   #####################################################
   # install packages
@@ -76,7 +74,7 @@ class verdi inherits hysds_base {
   # files in ops home
   #####################################################
 
-  file { "/home/$user/install_hysds.sh":
+  file { "/$user/install_hysds.sh":
     ensure  => present,
     content => template('verdi/install_hysds.sh'),
     owner   => $user,
