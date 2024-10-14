@@ -7,14 +7,6 @@ LABEL description="HySDS verdi image"
 
 # link configs
 RUN set -ex \
- && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py \
- && source $HOME/.bash_profile \
- && mv $HOME/verdi/ops/hysds $HOME/verdi/ops/hysds.bak \
- && cd $HOME/verdi/ops \
- && git clone https://github.com/hysds/hysds.git \
- && cd hysds \
- && git checkout -b HC-522-update origin/HC-522-update \
- && pip install -e . \
  && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py
 
 # set default supervisord conf and copy includes
