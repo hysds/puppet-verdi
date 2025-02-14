@@ -40,6 +40,7 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && rm -rf chimera \
  && rm -rf pele \
  && rm -rf sdscli \
+ && rm -rf grq2 \
  && git clone https://github.com/hysds/hysds_commons.git \
  && cd hysds_commons \
  && git checkout -b HC-562 origin/HC-562 \
@@ -57,6 +58,11 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && cd ../ \
  && git clone https://github.com/sdskit/sdscli.git \
  && cd sdscli \
+ && git checkout -b HC-562 origin/HC-562 \
+ && pip install -e . \
+ && cd ../ \
+ && git clone https://github.com/grq2/grq2.git \
+ && cd grq2 \
  && git checkout -b HC-562 origin/HC-562 \
  && pip install -e .
 
