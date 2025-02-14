@@ -8,9 +8,7 @@ LABEL description="HySDS verdi image"
 # link configs
 RUN set -ex \
  && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py \
- && cd $HOME/verdi/ops \
- && git clone https://github.com/hysds/hysds_commons.git \
- && cd hysds_commons \
+ && cd $HOME/verdi/ops/hysds_commons \
  && git checkout -b HC-562 origin/HC-562 \
  && pip install -e .
 
