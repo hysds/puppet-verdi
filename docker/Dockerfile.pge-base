@@ -33,7 +33,20 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && ./install_hysds.sh ${FRAMEWORK_BRANCH} ${HYSDS_RELEASE} \
  && rm -rf $HOME/verdi/ops/*/.git* \
  && rm -rf $HOME/.cache \
- && rm -rf $HOME/.git_oauth_token
+ && rm -rf $HOME/.git_oauth_token \
+ && source $HOME/.bash_profile \
+ && cd $HOME/verdi/ops \
+ && rm -rf hysds_commons \
+ && rm -rf pele \
+ && git clone https://github.com/hysds/hysds_commons.git \
+ && cd hysds_commons \
+ && git checkout -b v1.1.2.1 origin/v1.1.2.1 \
+ && pip install -e . \
+ && cd ../ \
+ && git clone https://github.com/hysds/pele.git \
+ && cd pele \
+ && git checkout -b v1.2.0.1 origin/v1.2.0.1 \
+ && pip install -e .
 
 
 FROM hysds/base:${TAG}
