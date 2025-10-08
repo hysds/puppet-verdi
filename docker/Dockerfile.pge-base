@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.0-experimental
-ARG BASE_IMAGE_TAG=latest
+ARG BASE_IMAGE_TAG=HC-589
 FROM hysds/dev:${BASE_IMAGE_TAG}
 
 # get org and branch
