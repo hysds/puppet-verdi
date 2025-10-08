@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$#" -ne 7 ]; then
+if [ "$#" -ne 8 ]; then
   echo "Usage: $0 <tag> <github org> <github repo branch> <framework branch> <hysds release> <base image tag> <final tag> <base branch>"
   echo "e.g.: $0 20170620 hysds master develop v4.0.1-beta.7 latest latest develop"
   echo "e.g.: $0 latest pymonger develop develop develop develop develop master"
