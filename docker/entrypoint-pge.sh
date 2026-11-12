@@ -4,4 +4,10 @@ set -e
 # common pge entrypoint tasks
 . /entrypoint-pge-common.sh
 
-exec gosu $UID:$GID "$@"
+# gosu resets HOME from /etc/passwd; keep the HOME set by the entrypoint
+# when the UID has no account in the image
+if getent passwd "$UID" >/dev/null; then
+  exec gosu $UID:$GID "$@"
+else
+  exec gosu $UID:$GID env HOME="$HOME" "$@"
+fi
